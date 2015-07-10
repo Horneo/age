@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="">
 </head>
 <body>
-<h1>Avaresto Ticket</h1>
+<h1>MyTicket</h1>
 <form action="tipocliente.php" method="post" accept-charset="utf-8">
 <label for="">Tipo: </label>
 <select name="tipo">
