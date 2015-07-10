@@ -1,0 +1,113 @@
+<link rel="stylesheet" type="text/css" href="assets/css/invoice.css">
+
+<div id="wrapper">
+    <p>{{ header }}</p>    	
+	<span class="left">Tel: {{ sale.phone }}</span> 
+	<span class="right">Factura Nr.: {{ sale.id }}</span><span class="left">Cliente: {{ sale.customer_name }}</span> 
+	<span class="right">Fecha: {{ sale.date }}</span><span class="left">Direccion: undefined</span>     
+
+	<div style="clear:both;"></div>
+    
+	<table class="table" cellspacing="0"  border="0" style="font-size:12px;"> 
+		<thead> 
+			<tr> 
+			    <th><em>#</em></th> 
+			    <th>Descripción</th> 
+		        <th>Cantidad</th>
+			    <th>Subtotal</th> 
+		        <th>Subtotal</th> 
+			</tr> 
+		</thead> 
+		<tbody> 
+			<tr ng-repeat="item in items">
+            	<td style="text-align:center;">{{ item.product_code }}</td>
+                <td style="text-align:left;">{{ item.product_name }}</td>
+                <td style="text-align:center;">{{ item.quantity }}</td>
+                <td style="text-align:right;">{{ item.gross_total }}</td>
+                <td style="text-align:right;">{{ item.subtotal }}</td>
+			</tr> 
+	    </tbody> 
+	</table> 
+    
+    <table class="totals" cellspacing="0" border="0" style="margin-bottom:5px; font-size:12px;">
+    <tbody>
+    <tr>
+	    <td style="text-align:left;">Cant. total</td><td style="text-align:right; padding-right:1.5%; border-right: 1px solid #000;font-weight:bold;">{{ cantidad }}</td>  
+	    <td style="text-align:left; padding-left:1.5%;">Total</td><td style="text-align:right;font-weight:bold;">{{ total }}</td>
+    </tr>
+
+    <tr>
+    <td style="text-align:left;"></td><td style="text-align:right; padding-right:1.5%; border-right: 1px solid #000;font-weight:bold;"></td>
+    <td style="text-align:left; padding-left:1.5%;"></td><td style="text-align:right;font-weight:bold;"></td>
+    </tr>
+     <tr> 
+    </tr>
+    <!--<tr>
+    <td colspan="2" style="text-align:left; font-weight:bold; border-top:1px solid #000; padding-top:5px;"><em>Iva</em></td><td colspan="2" style="border-top:1px solid #000; padding-top:5px; text-align:right; font-weight:bold;">68.88</td>
+    </tr>-->
+    <tr>
+    <td colspan="2" style="padding-top:5px; text-align:left; font-weight:bold;"><em>Descuento</em></td><td colspan="2" style="padding-top:5px; text-align:right; font-weight:bold;">{{ sale.discount }} ({{ sale.discounttotal }}%)</td>
+    </tr>
+    <tr ng-show="ticket">
+    <td colspan="2" style="padding-top:5px; text-align:left; font-weight:bold;"><em>{{ payroll }}</em></td><td colspan="2" style="padding-top:5px; text-align:right; font-weight:bold;">{{ ivatotal }} ({{ iva }}%)</td>
+    </tr>
+    <tr>
+    <td colspan="2" style="padding-top:5px; text-align:left; font-weight:bold;">Total a pagar</td><td colspan="2"  style="padding-top:5px; text-align:right; font-weight:bold;">{{ sale.total }}</td>
+    </tr>
+    <tr>    
+    <td colspan="2" style="text-align:left; font-weight:bold; padding-top:5px;">Paga con</td><td colspan="2" style="padding-top:5px; text-align:right; font-weight:bold;">{{ sale.paid_by }}</td>
+    </tr>
+    
+    <!--<td colspan="2" style="text-align:left; font-weight:bold; padding-top:5px;">
+        Vuelto    </td><td colspan="2" style="padding-top:5px; text-align:right; font-weight:bold;">
+        99.72    </td>-->
+  
+    </tr>
+
+    <tr align="center">
+        <td style="text-align:center; font-weight:bold; padding-top:5px;">
+            {{ footer }}        </td>
+    </tr>
+        
+    </tbody>
+    </table>
+        
+    <!--<div style="border-top:1px solid #000; padding-top:10px;">
+    <p>
+          0
+</p>    </div>-->
+    
+    <div id="buttons" style="padding-top:10px; text-transform:uppercase;">
+    <!--<span class="left"><a href="#" style="width:90%; display:block; font-size:12px; text-decoration: none; text-align:center; color:#000; background-color:#4FA950; border:2px solid #4FA950; padding: 10px 1px; font-weight:bold;" id="email">E-mail</a></span>-->
+    <button type="button" onClick="window.print();return false;" style="width:97%; cursor:pointer; font-size:12px; background-color:#FFA93C; color:#000; text-align: center; border:1px solid #FFA93C; padding: 10px 1px; font-weight:bold;">Imprimir</button>
+    
+    <div style="background:#F5F5F5; padding:10px;">
+    <!--<p style="font-weight:bold;">Please don't forget to disble the header and footer in browser print settings.</p>
+    <p style="text-transform: capitalize;"><strong>FF:</strong> File > Print Setup > Margin & Header/Footer Make all --blank--</p>
+    <p style="text-transform: capitalize;"><strong>chrome:</strong> Menu > Print > Disable Header/Footer in Option & Set Margins to None</p>	</div>
+    <div style="clear:both;"></div>-->
+    </div>
+</div>
+
+<style type="text/css" media="all">
+body { max-width: 300px; margin:0 auto; text-align:center; color:#000; font-family: Arial, Helvetica, sans-serif; font-size:12px; }
+#wrapper { min-width: 250px; margin: 0 auto; }
+#wrapper img { max-width: 300px; width: auto; }
+
+h2, h3, p { margin: 5px 0; }
+.left { width:60%; float:left; text-align:left; margin-bottom: 3px; }
+.right { width:40%; float:right; text-align:right; margin-bottom: 3px; }
+.table, .totals { width: 100%; margin:10px 0; }
+.table th { border-bottom: 1px solid #000; }
+.table td { padding:0; }
+.totals td { width: 24%; padding:0; }
+.table td:nth-child(2) { overflow:hidden; }
+
+@media print {
+	body { text-transform: uppercase; }
+	#buttons { display: none; }
+	#wrapper { width: 100%; margin: 0; font-size:9px; }
+	#wrapper img { max-width:300px; width: 80%; }
+}
+
+</style>
